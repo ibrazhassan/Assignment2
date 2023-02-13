@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Enter Your Information</title>
+  <style>
+    body {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+  </style>
+
+</head>
+<body>
+<h1>Enter Your Information</h1>
+<h4> Assignment 2 - Java Enterprise - Syed Ghazi - 991624817 </h4>
+<form action="#" th:action="@{/save}" th:object="${user}" method="post">
+  <div class="form-group">
+    <input type="text" class="form-control" th:field="*{firstName}" placeholder="Enter First Name" required />
+  </div>
+  <div class="form-group">
+    <input type="text" class="form-control" th:field="*{lastName}" placeholder="Enter Last Name" required />
+  </div>
+  <div class="form-group">
+    <select class="form-control" th:field="*{role}" required>
+      <option value="">Role:</option>
+      <option value="USER">USER</option>
+      <option value="ADMIN">ADMIN</option>
+    </select>
+  </div>
+  <div class="form-group">
+    <button type="submit" class="btn btn-primary">Submit</button>
+    <button type="reset" class="btn btn-secondary" th:action="@{/reset}">Reset</button>
+  </div>
+</form>
+<table  border="1" class="table">
+  <thead>
+  <tr>
+    <th>First Name</th>
+    <th>Last Name</th>
+    <th>Role</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr th:each="user : ${users}">
+    <td th:text="${user.firstName}"></td>
+    <td th:text="${user.lastName}"></td>
+    <td th:text="${user.role}"></td>
+  </tr>
+  </tbody>
+</table>
+</div>
+<div class="container" th:if="${isEmpty}">
+  <h3>No records found. Add User!</h3>
+</div>
+</body>

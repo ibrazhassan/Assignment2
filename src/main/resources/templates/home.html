@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Enter Your Information</title>
+</head>
+<body>
+<h1>Enter Your Information</h1>
+<form action="#" th:action="@{/addUser}" th:object="${users}" method="post">
+  <label>First Name:</label> <input type="text" name="firstName" placeholder="Enter First Name"
+                                    th:field="*{firstName}" /><br /> <label>Last Name:</label> <input type="text" name="lastName" placeholder="Enter Last Name" th:field="*{lastName}" /><br />
+  <label>Role:</label> <select name="role" th:field="*{role}">
+  <option value="USER">USER</option>
+  <option value="ADMIN">ADMIN</option>
+</select><br />
+  <input type="submit" value="Submit" />
+  <input type="reset" value="Reset" />
+</form>
+<br />
+<br />
+<table border="1">
+  <tr>
+    <th>First Name</th>
+    <th>Last Name</th>
+    <th>Role</th>
+  </tr>
+  <tr th:if="${users.isEmpty()}">
+    <td colspan="3">No records found. Add User!</td>
+  </tr>
+  <tr th:each="user : ${users}">
+    <td th:text="${user.firstName}"></td>
+    <td th:text="${user.lastName}"></td>
+    <td th:text="${user.role}"></td>
+  </tr>
+</table>
+</body>
+</html>
